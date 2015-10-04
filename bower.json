@@ -1,0 +1,23 @@
+{
+  "name": "jquery-simple-wizard",
+  "version": "0.1.0",
+  "description": "A jQuery plugin for creating a simple wizard.",
+  "main": "jquery.simplewizard.js",
+  "moduleType": [],
+  "keywords": [
+    "jquery",
+    "wizard"
+  ],
+  "authors": [
+    "Dzulqarnain Nasir"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dnasir/jquery-simple-wizard",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
