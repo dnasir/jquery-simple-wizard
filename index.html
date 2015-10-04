@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Wizard demo</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .wizard {}
+
+        .wizard-content {
+            overflow: hidden;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .wizard-step {
+            position: absolute;
+            width: 100%;
+            left: 100%;
+            opacity: 0;
+            transition: left 0.5s ease-in-out, opacity 0.5s ease;
+        }
+
+        .wizard-done {
+            left: -100%;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .wizard-step.wizard-current {
+            left: 0;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .wizard-step.wizard-current + .wizard-step {
+            left: 100%;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="wizard1" class="wizard">
+            <div class="wizard-content">
+                <div id="start" class="wizard-step">
+                    <button type="button" class="wizard-next">Start</button>
+                    <button type="button" class="wizard-goto" value="3">Go to last</button>
+                </div>
+                <div id="profile" class="wizard-step">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control required" />
+                    </div>
+                    <button type="button" class="wizard-prev">Previous</button>
+                    <button type="button" class="wizard-next">Next</button>
+                </div>
+                <div id="messages" class="wizard-step">
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control required"></textarea>
+                    </div>
+                    <button type="button" class="wizard-prev">Previous</button>
+                    <button type="button" class="wizard-next">Next</button>
+                </div>
+                <div id="finish" class="wizard-step">
+                    <button type="button" class="wizard-prev">Previous</button>
+                    <button type="button" class="wizard-next">Finish</button>
+                    <button type="button" class="wizard-goto" value="0">Go to first</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="jquery.simplewizard.js"></script>
+    <script>
+        $(function () {
+            $("#wizard1").simpleWizard();
+        });
+    </script>
+</body>
+
+</html>
