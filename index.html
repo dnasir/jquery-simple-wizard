@@ -32,13 +32,13 @@
             opacity: 0;
         }
 
-        .wizard-step.wizard-current {
+        .wizard-step.active {
             left: 0;
             z-index: 1;
             opacity: 1;
         }
 
-        .wizard-step.wizard-current + .wizard-step {
+        .wizard-step.active + .wizard-step {
             left: 100%;
             z-index: 0;
         }
@@ -48,6 +48,14 @@
 <body>
     <div class="container">
         <div id="wizard1" class="wizard">
+            <div class="wizard-header">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="wizard-step-indicator"><a href="#start">Start</a></li>
+                    <li role="presentation" class="wizard-step-indicator"><a href="#profile">Profile</a></li>
+                    <li role="presentation" class="wizard-step-indicator"><a href="#messages">Messages</a></li>
+                    <li role="presentation" class="wizard-step-indicator"><a href="#finish">Finish</a></li>
+                </ul>
+            </div>
             <div class="wizard-content">
                 <div id="start" class="wizard-step">
                     <button type="button" class="wizard-next">Start</button>
@@ -71,7 +79,7 @@
                 </div>
                 <div id="finish" class="wizard-step">
                     <button type="button" class="wizard-prev">Previous</button>
-                    <button type="button" class="wizard-next">Finish</button>
+                    <button type="button" class="wizard-finish">Finish</button>
                     <button type="button" class="wizard-goto" value="0">Go to first</button>
                 </div>
             </div>
@@ -83,7 +91,12 @@
     <script src="jquery.simplewizard.js"></script>
     <script>
         $(function () {
-            $("#wizard1").simpleWizard();
+            $("#wizard1").simpleWizard({
+                currentStepClass: "active",
+                onFinish: function() {
+                    alert("Wizard finished")
+                }
+            });
         });
     </script>
 </body>
