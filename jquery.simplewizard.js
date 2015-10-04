@@ -43,8 +43,6 @@
             });
 
             self.$el.on("wizard_onChange", function (e) {
-                var self = this;
-
                 clearTimeout(self.onChangeTimeout);
                 self.onChangeTimeout = setTimeout(function () {
                     if (typeof (self.opts.onChange) === "function") {
