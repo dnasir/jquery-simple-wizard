@@ -17,6 +17,10 @@
             onFinish: function () {}
         }, options);
         this.onChangeTimeout = null;
+        this.validation = {
+            formToValidate: ($.validator !== undefined ? this.$el.closest("form") : undefined),
+            isUnobtrusive: $.validator.unobtrusive !== undefined
+        };
         this.init();
     }
 
@@ -51,7 +55,7 @@
                 }
             });
 
-            self.$el.on("wizard_onChange", function(e) {
+            self.$el.on("wizard_onChange", function (e) {
                 if (typeof (self.opts.onChange) === "function") {
                     var current = self.getCurrentStep();
                     self.opts.onChange(e, self.$steps.eq(current));
@@ -66,6 +70,16 @@
 
             this.$steps.first().addClass(this.opts.cssClassStepActive);
             this.$indicators.first().addClass(this.opts.cssClassStepActive);
+
+            if (this.validation.formToValidate) {
+                this.validation.formToValidate.validate({
+                    ignore: ".wizard-ignore"
+                });
+            }
+
+            if (this.validation.formToValidate && this.validation.isUnobtrusive) {
+                $.data(this.validation.formToValidate[0], "validator").settings.ignore += ",.wizard-ignore";
+            }
 
             this.$el.triggerHandler("wizard_onInit");
         },
@@ -91,24 +105,33 @@
         },
 
         nextStep: function () {
-            if (this.getCurrentStep() >= this.$steps.length) {
+            var current = this.getCurrentStep();
+            if (!this.isValid(current)) {
+                return;
+            }
+
+            if (current >= this.$steps.length) {
                 return;
             }
 
             this.$steps.filter("." + this.opts.cssClassStepActive)
                 .addClass(this.opts.cssClassStepDone).removeClass(this.opts.cssClassStepActive)
                 .next().addClass(this.opts.cssClassStepActive);
+
             this.onChangeEventHandler();
         },
 
         prevStep: function () {
-            if (this.getCurrentStep() <= 0) {
+            var current = this.getCurrentStep();
+
+            if (current <= 0) {
                 return;
             }
 
             this.$steps.filter("." + this.opts.cssClassStepActive)
                 .removeClass(this.opts.cssClassStepActive)
                 .prev().addClass(this.opts.cssClassStepActive);
+
             this.onChangeEventHandler();
         },
 
@@ -121,6 +144,9 @@
             if (index > current) {
                 while (current < this.$steps.length - 1) {
                     this.nextStep();
+                    if (!this.isValid(current)) {
+                        break;
+                    }
                     current = this.getCurrentStep();
                 }
             } else if (index < current) {
@@ -137,12 +163,27 @@
 
         updateIndicators: function () {
             var current = this.getCurrentStep();
-            this.$indicators.filter(function (index) {
+            this.$indicators
+                .filter(function (index) {
                     return index < current;
                 })
                 .addClass(this.opts.cssClassStepDone);
             this.$indicators.removeClass(this.opts.cssClassStepActive)
                 .eq(current).addClass(this.opts.cssClassStepActive);
+        },
+
+        isValid: function (current) {
+            if (this.validation.formToValidate === undefined) {
+                return true;
+            }
+
+            this.$steps.not(":eq(" + current + ")").find("input, textarea").addClass("wizard-ignore");
+
+            var result = this.validation.formToValidate.valid();
+
+            this.$steps.find("input, textarea").removeClass("wizard-ignore");
+
+            return result;
         }
     };
 
