@@ -156,7 +156,7 @@
 
             var current = this.getCurrentStep();
             if (index > current) {
-                while (current < this.$steps.length - 1) {
+                while (current < index) {
                     this.nextStep();
                     if (!this.isValid(current)) {
                         break;
@@ -164,7 +164,7 @@
                     current = this.getCurrentStep();
                 }
             } else if (index < current) {
-                while (current > 0) {
+                while (current > index) {
                     this.prevStep();
                     current = this.getCurrentStep();
                 }
