@@ -45,17 +45,17 @@
                 self.finish();
             });
 
-            self.$el.on("wizard_onChange", function (e) {
-                clearTimeout(self.onChangeTimeout);
-                self.onChangeTimeout = setTimeout(function () {
-                    if (typeof (self.opts.onChange) === "function") {
-                        self.opts.onChange(e);
-                    }
+            self.$el.on("wizard_onInit", function (e) {
+                if (typeof (self.opts.onInit) === "function") {
+                    self.opts.onInit(e);
+                }
+            });
 
-                    if (self.$indicators.length) {
-                        self.updateIndicators();
-                    }
-                }, 100);
+            self.$el.on("wizard_onChange", function(e) {
+                if (typeof (self.opts.onChange) === "function") {
+                    var current = self.getCurrentStep();
+                    self.opts.onChange(e, self.$steps.eq(current));
+                }
             });
 
             self.$el.on("wizard_onFinish", function (e) {
@@ -70,6 +70,22 @@
             this.$el.triggerHandler("wizard_onInit");
         },
 
+        // onChange event handler buffer - this will prevent multiple event raise
+        onChangeEventHandler: function () {
+            var self = this;
+
+            clearTimeout(self.onChangeTimeout);
+            self.onChangeTimeout = setTimeout(function () {
+                if (self.$indicators.length) {
+                    self.updateIndicators();
+                }
+
+                self.$el.triggerHandler("wizard_onChange");
+            }, 100);
+        },
+
+        // methods
+
         getCurrentStep: function () {
             return this.$steps.filter("." + this.opts.cssClassStepActive).index();
         },
@@ -82,7 +98,7 @@
             this.$steps.filter("." + this.opts.cssClassStepActive)
                 .addClass(this.opts.cssClassStepDone).removeClass(this.opts.cssClassStepActive)
                 .next().addClass(this.opts.cssClassStepActive);
-            this.$el.triggerHandler("wizard_onChange");
+            this.onChangeEventHandler();
         },
 
         prevStep: function () {
@@ -93,7 +109,7 @@
             this.$steps.filter("." + this.opts.cssClassStepActive)
                 .removeClass(this.opts.cssClassStepActive)
                 .prev().addClass(this.opts.cssClassStepActive);
-            this.$el.triggerHandler("wizard_onChange");
+            this.onChangeEventHandler();
         },
 
         gotoStep: function (index) {
@@ -121,7 +137,9 @@
 
         updateIndicators: function () {
             var current = this.getCurrentStep();
-            this.$indicators.filter(function(index) { return index < current; })
+            this.$indicators.filter(function (index) {
+                    return index < current;
+                })
                 .addClass(this.opts.cssClassStepDone);
             this.$indicators.removeClass(this.opts.cssClassStepActive)
                 .eq(current).addClass(this.opts.cssClassStepActive);
