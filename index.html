@@ -8,7 +8,7 @@
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Wizard demo</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <style>
         .wizard {}
 
@@ -51,7 +51,7 @@
 
 <body>
     <div class="container">
-        <div id="wizard1" class="wizard">
+        <form id="wizard1" class="wizard">
             <div class="wizard-header">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="wizard-step-indicator"><a href="#start">Start</a></li>
@@ -87,11 +87,12 @@
                     <button type="button" class="wizard-goto" value="0">Go to first</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
     <script src="jquery.simplewizard.js"></script>
     <script>
         $(function () {

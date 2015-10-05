@@ -22,5 +22,9 @@
   "homepage": "https://github.com/dnasir/jquery-simple-wizard",
   "dependencies": {
     "jquery": "^2.1.4"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.5",
+    "jquery-validation": "^1.14.0"
   }
 }
