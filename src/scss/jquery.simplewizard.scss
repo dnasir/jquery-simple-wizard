@@ -1,0 +1,34 @@
+.wizard-header li.done a {
+    color: #777;
+}
+
+.wizard-content {
+    overflow: hidden;
+    position: relative;
+    min-height: 300px;
+}
+
+.wizard-step {
+    position: absolute;
+    width: 100%;
+    left: 100%;
+    opacity: 0;
+    transition: left 0.5s ease-in-out, opacity 0.5s ease;
+
+    &.done {
+        left: -100%;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    &.active {
+        left: 0;
+        z-index: 1;
+        opacity: 1;
+    }
+
+    &.active + .wizard-step {
+        left: 100%;
+        z-index: 0;
+    }
+}

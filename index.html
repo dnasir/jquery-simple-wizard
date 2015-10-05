@@ -9,44 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Wizard demo</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <style>
-        .wizard {}
-
-        .wizard-header li.done a {
-            color: #777;
-        }
-
-        .wizard-content {
-            overflow: hidden;
-            position: relative;
-            min-height: 300px;
-        }
-
-        .wizard-step {
-            position: absolute;
-            width: 100%;
-            left: 100%;
-            opacity: 0;
-            transition: left 0.5s ease-in-out, opacity 0.5s ease;
-        }
-
-        .wizard-step.done {
-            left: -100%;
-            z-index: -1;
-            opacity: 0;
-        }
-
-        .wizard-step.active {
-            left: 0;
-            z-index: 1;
-            opacity: 1;
-        }
-
-        .wizard-step.active + .wizard-step {
-            left: 100%;
-            z-index: 0;
-        }
-    </style>
+    <link href="dist/jquery.simplewizard.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -91,9 +54,9 @@
     </div>
 
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="jquery.simplewizard.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="dist/jquery.simplewizard.min.js"></script>
     <script>
         $(function () {
             $("#wizard1").simpleWizard({

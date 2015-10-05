@@ -1,5 +1,9 @@
-/*global jQuery:false */
-
+/**
+ * jquery-simple-wizard - A jQuery plugin for creating a simple wizard.
+ * @version v0.1.0
+ * @link https://github.com/dnasir/jquery-simple-wizard
+ * @license MIT
+ */
 (function ($) {
     "use strict";
 
