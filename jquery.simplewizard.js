@@ -81,7 +81,7 @@
             this.$steps.filter("." + this.opts.currentStepClass)
                 .addClass("wizard-done").removeClass(this.opts.currentStepClass)
                 .next().addClass(this.opts.currentStepClass);
-            this.$el.triggerHandler("wizard_onChanged");
+            this.$el.triggerHandler("wizard_onChange");
         },
 
         prevStep: function () {
