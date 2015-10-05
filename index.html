@@ -12,6 +12,10 @@
     <style>
         .wizard {}
 
+        .wizard-header li.done a {
+            color: #777;
+        }
+
         .wizard-content {
             overflow: hidden;
             position: relative;
@@ -26,7 +30,7 @@
             transition: left 0.5s ease-in-out, opacity 0.5s ease;
         }
 
-        .wizard-done {
+        .wizard-step.done {
             left: -100%;
             z-index: -1;
             opacity: 0;
@@ -92,7 +96,8 @@
     <script>
         $(function () {
             $("#wizard1").simpleWizard({
-                currentStepClass: "active",
+                cssClassStepActive: "active",
+                cssClassStepDone: "done",
                 onFinish: function() {
                     alert("Wizard finished")
                 }

@@ -10,7 +10,8 @@
         this.$steps = this.$el.find(".wizard-step");
         this.$indicators = this.$el.find(".wizard-step-indicator");
         this.opts = $.extend({
-            currentStepClass: "wizard-current",
+            cssClassStepDone: "wizard-done",
+            cssClassStepActive: "wizard-current",
             onInit: function () {},
             onChange: function () {},
             onFinish: function () {}
@@ -63,14 +64,14 @@
                 }
             });
 
-            this.$steps.first().addClass(this.opts.currentStepClass);
-            this.$indicators.first().addClass(this.opts.currentStepClass);
+            this.$steps.first().addClass(this.opts.cssClassStepActive);
+            this.$indicators.first().addClass(this.opts.cssClassStepActive);
 
             this.$el.triggerHandler("wizard_onInit");
         },
 
         getCurrentStep: function () {
-            return this.$steps.filter("." + this.opts.currentStepClass).index();
+            return this.$steps.filter("." + this.opts.cssClassStepActive).index();
         },
 
         nextStep: function () {
@@ -78,9 +79,9 @@
                 return;
             }
 
-            this.$steps.filter("." + this.opts.currentStepClass)
-                .addClass("wizard-done").removeClass(this.opts.currentStepClass)
-                .next().addClass(this.opts.currentStepClass);
+            this.$steps.filter("." + this.opts.cssClassStepActive)
+                .addClass(this.opts.cssClassStepDone).removeClass(this.opts.cssClassStepActive)
+                .next().addClass(this.opts.cssClassStepActive);
             this.$el.triggerHandler("wizard_onChange");
         },
 
@@ -89,9 +90,9 @@
                 return;
             }
 
-            this.$steps.filter("." + this.opts.currentStepClass)
-                .removeClass(this.opts.currentStepClass)
-                .prev().addClass(this.opts.currentStepClass);
+            this.$steps.filter("." + this.opts.cssClassStepActive)
+                .removeClass(this.opts.cssClassStepActive)
+                .prev().addClass(this.opts.cssClassStepActive);
             this.$el.triggerHandler("wizard_onChange");
         },
 
@@ -120,8 +121,10 @@
 
         updateIndicators: function () {
             var current = this.getCurrentStep();
-            this.$indicators.removeClass(this.opts.currentStepClass)
-                .eq(current).addClass(this.opts.currentStepClass);
+            this.$indicators.filter(function(index) { return index < current; })
+                .addClass(this.opts.cssClassStepDone);
+            this.$indicators.removeClass(this.opts.cssClassStepActive)
+                .eq(current).addClass(this.opts.cssClassStepActive);
         }
     };
 
