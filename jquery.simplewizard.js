@@ -68,6 +68,16 @@
                 }
             });
 
+            self.$el.on("click", "a", function (e) {
+                var $target = $(e.target.hash),
+                    $targetStep = self.$steps.filter($target);
+
+                if ($targetStep.length) {
+                    e.preventDefault();
+                    self.gotoStep($targetStep.index());
+                }
+            });
+
             this.$steps.first().addClass(this.opts.cssClassStepActive);
             this.$indicators.first().addClass(this.opts.cssClassStepActive);
 
