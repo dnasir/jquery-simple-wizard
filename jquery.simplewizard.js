@@ -126,9 +126,14 @@
     };
 
     $.fn[pluginName] = function (options) {
+        var args = Array.prototype.slice.call(arguments, 1);
+
         return this.each(function () {
             if (!$.data(this, "plugin_" + pluginName)) {
                 $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+            } else if (typeof options === "string" && Plugin.prototype.hasOwnProperty(options)) {
+                var instance = $.data(this, "plugin_" + pluginName);
+                Plugin.prototype[options].apply(instance, args);
             }
         });
     };
