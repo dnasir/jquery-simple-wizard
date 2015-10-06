@@ -1,5 +1,9 @@
-/*global jQuery:false */
-
+/**
+ * jquery-simple-wizard - A jQuery plugin for creating a simple wizard.
+ * @version v0.1.0
+ * @link https://github.com/dnasir/jquery-simple-wizard
+ * @license MIT
+ */
 (function ($) {
     "use strict";
 
@@ -65,6 +69,16 @@
             self.$el.on("wizard_onFinish", function (e) {
                 if (typeof (self.opts.onFinish) === "function") {
                     self.opts.onFinish(e);
+                }
+            });
+
+            self.$el.on("click", "a", function (e) {
+                var $target = $(e.target.hash),
+                    $targetStep = self.$steps.filter($target);
+
+                if ($targetStep.length) {
+                    e.preventDefault();
+                    self.gotoStep($targetStep.index());
                 }
             });
 
@@ -142,7 +156,7 @@
 
             var current = this.getCurrentStep();
             if (index > current) {
-                while (current < this.$steps.length - 1) {
+                while (current < index) {
                     this.nextStep();
                     if (!this.isValid(current)) {
                         break;
@@ -150,7 +164,7 @@
                     current = this.getCurrentStep();
                 }
             } else if (index < current) {
-                while (current > 0) {
+                while (current > index) {
                     this.prevStep();
                     current = this.getCurrentStep();
                 }
