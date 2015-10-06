@@ -1,0 +1,35 @@
+{
+  "name": "jquery-simple-wizard",
+  "version": "0.1.0",
+  "description": "A jQuery plugin for creating a simple wizard.",
+  "main": [
+	"dist/jquery.simplewizard.js",
+	"dist/jquery.simplewizard.min.js",
+	"dist/jquery.simplewizard.min.js.map",
+	"dist/jquery.simplewizard.min.css"
+  ],
+  "moduleType": [],
+  "keywords": [
+    "jquery",
+    "wizard"
+  ],
+  "authors": [
+    "Dzulqarnain Nasir"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dnasir/jquery-simple-wizard",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "jquery-validation": "~1.14.0",
+    "bootstrap": "~3.3.5"
+  }
+}
