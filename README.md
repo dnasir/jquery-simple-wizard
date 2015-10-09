@@ -1,3 +1,6 @@
+[![NPM version](http://img.shields.io/npm/v/jquery-simple-wizard.svg)](https://npmjs.org/package/jquery-simple-wizard)
+[![Bower](https://img.shields.io/bower/v/jquery-simple-wizard.svg)](http://bower.io/search/?q=jquery-simple-wizard)
+
 # jQuery Simple Wizard
 A jQuery plugin for creating a simple wizard.
 
