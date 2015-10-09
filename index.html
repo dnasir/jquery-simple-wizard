@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>jQuery Simple Wizard by dnasir</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>jQuery Simple Wizard</h1>
+          <h2>A jQuery plugin for creating a simple wizard.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/dnasir/jquery-simple-wizard/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/dnasir/jquery-simple-wizard/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/dnasir/jquery-simple-wizard" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p><a href="https://npmjs.org/package/jquery-simple-wizard"><img src="http://img.shields.io/npm/v/jquery-simple-wizard.svg" alt="NPM version"></a>
+<a href="http://bower.io/search/?q=jquery-simple-wizard"><img src="https://img.shields.io/bower/v/jquery-simple-wizard.svg" alt="Bower"></a></p>
+
+<h1>
+<a id="jquery-simple-wizard" class="anchor" href="#jquery-simple-wizard" aria-hidden="true"><span class="octicon octicon-link"></span></a>jQuery Simple Wizard</h1>
+
+<p>A jQuery plugin for creating a simple wizard.</p>
+
+<h2>
+<a id="why-was-this-created" class="anchor" href="#why-was-this-created" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why was this created?</h2>
+
+<p>I needed a simple jQuery wizard that simply navigates from one step to another, and the ones I've found were too complex. I didn't need the plugin to generate stuff like headings, previous and next buttons, etc. I wanted to have control over what goes on. So I created my own.</p>
+
+<h2>
+<a id="how-do-i-use-it" class="anchor" href="#how-do-i-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How do I use it?</h2>
+
+<p>Firstly, build your wizard markup using the following convention:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard1<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-header<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">ul</span>&gt;
+            &lt;<span class="pl-ent">li</span> <span class="pl-e">role</span>=<span class="pl-s"><span class="pl-pds">"</span>presentation<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step-indicator<span class="pl-pds">"</span></span>&gt;Start&lt;/<span class="pl-ent">li</span>&gt;
+            &lt;<span class="pl-ent">li</span> <span class="pl-e">role</span>=<span class="pl-s"><span class="pl-pds">"</span>presentation<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step-indicator<span class="pl-pds">"</span></span>&gt;Profile&lt;/<span class="pl-ent">li</span>&gt;
+            &lt;<span class="pl-ent">li</span> <span class="pl-e">role</span>=<span class="pl-s"><span class="pl-pds">"</span>presentation<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step-indicator<span class="pl-pds">"</span></span>&gt;Message&lt;/<span class="pl-ent">li</span>&gt;
+            &lt;<span class="pl-ent">li</span> <span class="pl-e">role</span>=<span class="pl-s"><span class="pl-pds">"</span>presentation<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step-indicator<span class="pl-pds">"</span></span>&gt;Finish&lt;/<span class="pl-ent">li</span>&gt;
+        &lt;/<span class="pl-ent">ul</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-content<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step<span class="pl-pds">"</span></span>&gt;
+          &lt;<span class="pl-ent">h2</span>&gt;Welcome to my wizard&lt;/<span class="pl-ent">h2</span>&gt;
+          &lt;<span class="pl-ent">p</span>&gt;Let's begin&lt;/<span class="pl-ent">p</span>&gt;
+          &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-next<span class="pl-pds">"</span></span>&gt;Start&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">label</span> <span class="pl-e">for</span>=<span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>&gt;Name&lt;/<span class="pl-ent">label</span>&gt;
+                &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>required<span class="pl-pds">"</span></span> /&gt;
+            &lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-prev<span class="pl-pds">"</span></span>&gt;Previous&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-next<span class="pl-pds">"</span></span>&gt;Next&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">label</span> <span class="pl-e">for</span>=<span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>&gt;Message&lt;/<span class="pl-ent">label</span>&gt;
+                &lt;<span class="pl-ent">textarea</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">textarea</span>&gt;
+            &lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-prev<span class="pl-pds">"</span></span>&gt;Previous&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-next<span class="pl-pds">"</span></span>&gt;Next&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-step<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-prev<span class="pl-pds">"</span></span>&gt;Previous&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-finish<span class="pl-pds">"</span></span>&gt;Finish&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>wizard-goto<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>&gt;Go back to start&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">form</span>&gt;</pre></div>
+
+<p>Include the plugin files after your jQuery reference, and run the following code:</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>#wizard1<span class="pl-pds">"</span></span>).simpleWizard();</pre></div>
+
+<p>where <code>#wizard1</code> is a reference to the wizard container.</p>
+
+<p><strong>Note</strong></p>
+
+<p>As far as the HTML markup is concerned, as long as you use the <code>wizard-step</code> class to mark the steps and <code>wizard-step-indicator</code> to mark the step indicators, as well as the <code>wizard-next</code>,<code>wizard-prev</code> and <code>wizard-finish</code> buttons, everything else is up to you.</p>
+
+<h2>
+<a id="what-can-i-change" class="anchor" href="#what-can-i-change" aria-hidden="true"><span class="octicon octicon-link"></span></a>What can I change?</h2>
+
+<p>Currently, there are only two items that you can control - the active state CSS class, and the done state CSS class. I'll update this as I make them available. Include them in the plugin initialisation code.</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>#wizard1<span class="pl-pds">"</span></span>).simpleWizard({
+    cssClassStepDone<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>wizard-done<span class="pl-pds">"</span></span>, <span class="pl-c">// default value</span>
+    cssClassStepActive<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>wizard-current<span class="pl-pds">"</span></span>, <span class="pl-c">// default value</span>
+});</pre></div>
+
+<h2>
+<a id="what-about-events" class="anchor" href="#what-about-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about events?</h2>
+
+<p>You can add event handlers to the plugin initialisation code.</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>#wizard1<span class="pl-pds">"</span></span>).simpleWizard({
+    <span class="pl-en">onInit</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>Let's get started!<span class="pl-pds">"</span></span>)
+    },
+    <span class="pl-en">onChange</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>More to come..<span class="pl-pds">"</span></span>);
+    }
+    <span class="pl-en">onFinish</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+        <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">"</span>End of the line, pal.<span class="pl-pds">"</span></span>);
+    }
+});</pre></div>
+
+<h4>
+<a id="oninit" class="anchor" href="#oninit" aria-hidden="true"><span class="octicon octicon-link"></span></a>onInit</h4>
+
+<p>Called when the plugin is done initialising.</p>
+
+<h4>
+<a id="onchange" class="anchor" href="#onchange" aria-hidden="true"><span class="octicon octicon-link"></span></a>onChange</h4>
+
+<p>Called on every step change.</p>
+
+<h4>
+<a id="onfinish" class="anchor" href="#onfinish" aria-hidden="true"><span class="octicon octicon-link"></span></a>onFinish</h4>
+
+<p>Called when the wizard reaches the end.</p>
+
+<h2>
+<a id="what-about-transition-animations" class="anchor" href="#what-about-transition-animations" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about transition animations?</h2>
+
+<p>The plugin will update the CSS class for the step element based on its state, and you can use CSS3 transition for animations. I don't see why we need to use JavaScript animations because I think we should all be using CSS3-capable browsers now.</p>
+
+<h2>
+<a id="what-about-validation" class="anchor" href="#what-about-validation" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about validation?</h2>
+
+<p>This plugin supports jQuery Validation as well as jQuery Unobtrusive Validation. Simply include the libraries in your code prior to the plugin initialisation code for this to apply. Validation will be executed on every step change, and the plugin will prevent the user from moving forward when there's a validation error.</p>
+        </section>
+
+        <footer>
+          jQuery Simple Wizard is maintained by <a href="https://github.com/dnasir">dnasir</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
